@@ -1,0 +1,11 @@
+{
+  "name": "bedrock-data",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "prismarine-nbt": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1"
+  }
+}
