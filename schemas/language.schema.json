@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/mc-zuri/bedrock-data/schemas/language.schema.json",
+  "title": "release/<build>/language.json.gz, decompressed: each resource pack's en_US strings, vanilla first",
+  "type": "object",
+  "required": ["locale", "packs"],
+  "additionalProperties": false,
+  "properties": {
+    "locale": { "const": "en_US" },
+    "packs": {
+      "type": "object",
+      "required": ["vanilla"],
+      "propertyNames": { "pattern": "^[A-Za-z0-9_.-]+$" },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": { "type": "string" }
+      }
+    }
+  }
+}

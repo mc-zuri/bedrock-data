@@ -1,0 +1,21 @@
+# A push that adds or changes a release's data has bedrock-data-generator regenerate minecraft-data from that commit.
+# A preview's build.json alone changes nothing the generator reads.
+name: notify generator
+
+on:
+  push:
+    branches: [main]
+    paths: ['release/**']
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run the generator on this commit
+        env:
+          GH_TOKEN: ${{ secrets.GENERATOR_DISPATCH_TOKEN }}
+          GENERATOR_REPO: ${{ vars.GENERATOR_REPO }}
+        run: gh workflow run generate.yml --repo "$GENERATOR_REPO" --ref main -f data_ref="$GITHUB_SHA"
