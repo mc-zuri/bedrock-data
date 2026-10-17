@@ -13,6 +13,14 @@
     "language": {
       "file": "language.json.gz",
       "from": "windows"
+    },
+    "blockPalette": {
+      "file": "block_palette.nbt",
+      "from": "windows"
+    },
+    "blockShapes": {
+      "file": "block_shapes.json.gz",
+      "from": "windows"
     }
   }
 }
