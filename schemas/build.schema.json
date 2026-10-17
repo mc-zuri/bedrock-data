@@ -30,6 +30,24 @@
             "file": { "const": "language.json.gz" },
             "from": { "$ref": "#/definitions/platform" }
           }
+        },
+        "blockPalette": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "block_palette.nbt" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "blockShapes": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "block_shapes.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
         }
       }
     }
