@@ -1,5 +1,7 @@
 # A push that adds or changes a release's data has bedrock-data-generator regenerate minecraft-data from that commit.
-# A preview's build.json alone changes nothing the generator reads.
+# A preview's build.json alone changes nothing the generator reads. Running another repo's workflow takes a token
+# (GENERATOR_DISPATCH_TOKEN); without one this does nothing, and the generator's own schedule picks the commit up
+# within the hour after the extractor's.
 name: notify generator
 
 on:
@@ -13,9 +15,13 @@ permissions: {}
 jobs:
   notify:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GENERATOR_DISPATCH_TOKEN }}
+      GENERATOR_REPO: ${{ vars.GENERATOR_REPO }}
     steps:
       - name: Run the generator on this commit
-        env:
-          GH_TOKEN: ${{ secrets.GENERATOR_DISPATCH_TOKEN }}
-          GENERATOR_REPO: ${{ vars.GENERATOR_REPO }}
+        if: env.GH_TOKEN != ''
         run: gh workflow run generate.yml --repo "$GENERATOR_REPO" --ref main -f data_ref="$GITHUB_SHA"
+      - name: No token to run it with
+        if: env.GH_TOKEN == ''
+        run: echo "::notice::no GENERATOR_DISPATCH_TOKEN; $GENERATOR_REPO's schedule picks this commit up"
