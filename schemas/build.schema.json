@@ -1,14 +1,14 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/mc-zuri/bedrock-data/schemas/build.schema.json",
-  "title": "<channel>/<build>/build.json: a build's downloads, and what was extracted from it",
+  "title": "release/<build>/build.json: a release's zips, and what was extracted from which of them",
   "type": "object",
-  "required": ["build", "version", "channel", "binary"],
+  "required": ["build", "version", "channel", "binary", "data"],
   "additionalProperties": false,
   "properties": {
     "build": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$" },
-    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(-preview\\.\\d+)?$" },
-    "channel": { "enum": ["release", "preview"] },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "channel": { "const": "release" },
     "binary": {
       "type": "object",
       "minProperties": 1,
@@ -41,7 +41,7 @@
       "required": ["url", "sha256", "size"],
       "additionalProperties": false,
       "properties": {
-        "url": { "type": "string", "pattern": "^https://www\\.minecraft\\.net/bedrockdedicatedserver/bin-(linux|win)(-preview)?/bedrock-server-\\d+\\.\\d+\\.\\d+\\.\\d+\\.zip$" },
+        "url": { "type": "string", "pattern": "^https://www\\.minecraft\\.net/bedrockdedicatedserver/bin-(linux|win)/bedrock-server-\\d+\\.\\d+\\.\\d+\\.\\d+\\.zip$" },
         "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
         "size": { "type": "integer", "minimum": 1 }
       }
