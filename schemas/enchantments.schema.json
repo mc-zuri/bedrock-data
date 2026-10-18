@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/mc-zuri/bedrock-data/schemas/enchantments.schema.json",
+  "title": "release/<build>/enchantments.json.gz (decompressed): every enchantment",
+  "type": "object",
+  "required": [
+    "enchantments"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "enchantments": {
+      "description": "By id, from 0",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "descriptionId",
+          "frequency",
+          "tradeable",
+          "primarySlots",
+          "secondarySlots",
+          "minLevel",
+          "maxLevel",
+          "minCost",
+          "maxCost",
+          "incompatible",
+          "treasureOnly",
+          "discoverable"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "Enchant::Type: the id an item's ench list names it by",
+            "type": "integer",
+            "minimum": 0
+          },
+          "name": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "description": "Its language key, as the language file has it",
+            "type": "string"
+          },
+          "frequency": {
+            "description": "Its weight among the enchantments an enchanting table offers",
+            "type": "integer"
+          },
+          "tradeable": {
+            "description": "False for those no villager trades",
+            "type": "boolean"
+          },
+          "primarySlots": {
+            "description": "Enchant::Slot bits of the items an enchanting table offers it for",
+            "type": "integer"
+          },
+          "secondarySlots": {
+            "description": "Enchant::Slot bits of the items an anvil puts it on as well",
+            "type": "integer"
+          },
+          "minLevel": {
+            "type": "integer"
+          },
+          "maxLevel": {
+            "type": "integer"
+          },
+          "minCost": {
+            "description": "Enchant::getMinCost at levels 1 to its max level (at least 2)",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "maxCost": {
+            "description": "Enchant::getMaxCost at the same levels",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "incompatible": {
+            "description": "The ids of the enchantments Enchant::isCompatibleWith answers false for",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "treasureOnly": {
+            "type": "boolean"
+          },
+          "discoverable": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

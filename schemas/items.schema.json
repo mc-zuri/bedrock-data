@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/mc-zuri/bedrock-data/schemas/items.schema.json",
+  "title": "release/<build>/items.json.gz (decompressed): every registered item",
+  "type": "object",
+  "required": ["items", "aliases", "complexAliases", "creative"],
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "description": "In id order",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "id", "descriptionId", "maxStackSize", "maxDamage", "enchantSlots", "tags", "repairItems", "componentBased"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-z0-9_.-]+:" },
+          "id": { "description": "The runtime id the server sends a client for it", "type": "integer" },
+          "descriptionId": { "description": "Its language key, without .name; empty where it has none", "type": "string" },
+          "maxStackSize": { "description": "Item::getMaxStackSize, of a stack without data (a bucket's by what it holds)", "type": "integer", "minimum": 1, "maximum": 64 },
+          "maxDamage": { "description": "Item::getMaxDamage: its durability, 0 where it does not wear out", "type": "integer", "minimum": 0 },
+          "enchantSlots": { "description": "Item::getEnchantSlot: Enchant::Slot bits (armor head 1, torso 2, feet 4, legs 8, sword 16, bow 32, ...; -1 every bit)", "type": "integer" },
+          "tags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "repairItems": { "description": "The items Item::isValidRepairItem takes to repair it, where it wears out", "type": "array", "items": { "type": "string" } },
+          "componentBased": { "description": "As the item registry the server sends a client has it", "type": "boolean" },
+          "version": { "description": "The item registry's, from 1.21.60", "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+          "nbt": { "description": "The item registry's components of a component-based item, from 1.21.60: an NBT tag as { type, name, value }", "type": "object" },
+          "components": { "description": "item_component's components of it, where the server sends them (1.18.11 to 1.21.50): an NBT tag as { type, name, value }", "type": "object" },
+          "food": {
+            "description": "A food's, as its legacy food component has it, where the build keeps one",
+            "type": "object",
+            "required": ["nutrition", "saturationModifier"],
+            "additionalProperties": false,
+            "properties": { "nutrition": { "type": "integer" }, "saturationModifier": { "type": "number" } }
+          }
+        }
+      }
+    },
+    "aliases": {
+      "description": "The old names the game still reads (loot tables name minecraft:fish for cod), each with the item it names",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "item"],
+        "additionalProperties": false,
+        "properties": { "name": { "type": "string" }, "item": { "type": "string" } }
+      }
+    },
+    "creative": {
+      "description": "The creative list the server sends a client, in its order",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item", "metadata", "blockState"],
+        "additionalProperties": false,
+        "properties": {
+          "item": { "type": "string" },
+          "metadata": { "type": "integer" },
+          "blockState": { "description": "The block state it places, by its runtime id (its index in block_palette.nbt); null where it places none", "type": ["integer", "null"], "minimum": 0 },
+          "nbt": { "description": "The stack's own NBT, where it has some: an NBT tag as { type, name, value }", "type": "object" }
+        }
+      }
+    },
+    "complexAliases": {
+      "description": "The old names whose data values became items of their own (minecraft:log), each with its items by data value",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "items"],
+        "additionalProperties": false,
+        "properties": { "name": { "type": "string" }, "items": { "type": "array", "items": { "type": "string" } } }
+      }
+    }
+  }
+}

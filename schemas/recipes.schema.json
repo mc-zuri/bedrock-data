@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/mc-zuri/bedrock-data/schemas/recipes.schema.json",
+  "title": "release/<build>/recipes.json.gz (decompressed): the recipes of a grid crafting_data sends",
+  "type": "object",
+  "required": ["recipes"],
+  "additionalProperties": false,
+  "properties": {
+    "recipes": {
+      "description": "In the server's order",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "id", "block", "input", "output"],
+        "additionalProperties": false,
+        "properties": {
+          "type": { "enum": ["shaped", "shapeless", "shulker_box"] },
+          "id": { "type": "string" },
+          "block": { "description": "Where it is made: crafting_table, stonecutter, ...; deprecated: the crafting grid's old recipes", "type": "string" },
+          "width": { "description": "A shaped recipe's grid", "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "input": {
+            "description": "A shaped recipe's slots row by row (null: an empty one); a shapeless recipe's ingredients",
+            "type": "array",
+            "items": { "oneOf": [{ "type": "null" }, { "$ref": "#/definitions/ingredient" }] }
+          },
+          "output": {
+            "description": "The result, then what the ingredients give back",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["item", "metadata", "count", "blockState"],
+              "additionalProperties": false,
+              "properties": {
+                "item": { "type": "string" },
+                "metadata": { "type": "integer" },
+                "count": { "type": "integer", "minimum": 1 },
+                "blockState": { "description": "The block state it carries (a runtime id), null where none", "type": ["integer", "null"], "minimum": 0 }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ingredient": {
+      "description": "One item (metadata absent: any data value), an item named by a name descriptor or a complex alias, the items of a tag, or a molang expression; and how many",
+      "type": "object",
+      "required": ["count"],
+      "additionalProperties": false,
+      "properties": {
+        "item": { "type": "string" },
+        "descriptor": { "type": "string" },
+        "metadata": { "type": "integer" },
+        "tag": { "type": "string" },
+        "alias": { "type": "string" },
+        "molang": { "type": "string" },
+        "count": { "type": "integer", "minimum": 1 }
+      },
+      "oneOf": [{ "required": ["item"] }, { "required": ["descriptor"] }, { "required": ["tag"] }, { "required": ["alias"] }, { "required": ["molang"] }]
+    }
+  }
+}

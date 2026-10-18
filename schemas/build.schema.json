@@ -48,6 +48,114 @@
             "file": { "const": "block_shapes.json.gz" },
             "from": { "$ref": "#/definitions/platform" }
           }
+        },
+        "blocks": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "blocks.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "items": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "items.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "enchantments": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "enchantments.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "biomes": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "biomes.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "effects": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "effects.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "enums": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "enums.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "tints": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "tints.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "recipes": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "recipes.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "entities": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "entities.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "commands": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "commands.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "attributes": {
+          "type": "object",
+          "required": ["file", "from"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "attributes.json.gz" },
+            "from": { "$ref": "#/definitions/platform" }
+          }
+        },
+        "steve": {
+          "description": "Recorded from a client of the release's version: no platform's",
+          "type": "object",
+          "required": ["file"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "const": "steve.json.gz" }
+          }
         }
       }
     }

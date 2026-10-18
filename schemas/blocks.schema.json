@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/mc-zuri/bedrock-data/schemas/blocks.schema.json",
+  "title": "release/<build>/blocks.json.gz (decompressed): what the game says of each block type and each of its states, in the palette's order",
+  "type": "object",
+  "required": ["blocks", "lootTables"],
+  "additionalProperties": false,
+  "properties": {
+    "blocks": {
+      "description": "Every block type in runtime id order (block_palette.nbt's), each with its states in the palette's order",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "id", "descriptionId", "tags", "requiresCorrectTool", "translucency", "defaultState", "states"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "pattern": "^minecraft:" },
+          "id": { "description": "The block's numeric id (BlockLegacy::mID)", "type": "integer", "minimum": 0 },
+          "descriptionId": { "description": "Its language key, without .name: tile.stone", "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9_.-]+:" }, "uniqueItems": true },
+          "requiresCorrectTool": { "description": "It drops only when dug by an item that harvests it (harvestedBy)", "type": "boolean" },
+          "translucency": { "type": "number" },
+          "defaultState": { "description": "The game's default state, as an index into states", "type": "integer", "minimum": 0 },
+          "loot": {
+            "description": "The loot tables its vanilla behavior pack definition names (keys of lootTables): a data-driven block's drops",
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" }
+          },
+          "states": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["data", "hardness", "explosionResistance", "friction", "flameOdds", "burnOdds", "lightEmission", "lightDampening", "canContainLiquid", "mapColor", "destroySpeeds", "harvestedBy", "drops"],
+              "additionalProperties": false,
+              "properties": {
+                "data": { "description": "Its data value (Block::mData)", "type": "integer", "minimum": 0 },
+                "hardness": { "description": "The destroy speed: -1 where it cannot be dug", "type": "number" },
+                "explosionResistance": { "type": "number" },
+                "friction": { "type": "number" },
+                "flameOdds": { "description": "How readily fire catches on it", "type": "integer" },
+                "burnOdds": { "description": "How readily fire burns it away", "type": "integer" },
+                "lightEmission": { "type": "integer", "minimum": 0, "maximum": 15 },
+                "lightDampening": { "type": "integer", "minimum": 0, "maximum": 15 },
+                "canContainLiquid": { "description": "It can be waterlogged: BlockLegacy::canContainLiquid(), or its liquid detection component's", "type": "boolean" },
+                "mapColor": {
+                  "description": "Block::getMapColor with the state set in a flat world (plains): mce::Color [r, g, b, a], each 0 - 1",
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": { "type": "number", "minimum": 0, "maximum": 1 }
+                },
+                "destroySpeeds": {
+                  "description": "Each item's Item::getDestroySpeed on it, held as a stack of one without enchantments, where it is not 1",
+                  "type": "object",
+                  "propertyNames": { "pattern": "^[a-z0-9_.-]+:" },
+                  "additionalProperties": { "type": "number" }
+                },
+                "harvestedBy": {
+                  "description": "The items whose Item::canDestroySpecial holds for it",
+                  "type": "array",
+                  "items": { "type": "string", "pattern": "^[a-z0-9_.-]+:" },
+                  "uniqueItems": true
+                },
+                "drops": {
+                  "description": "What the game's drop code drops when a player mines it with an empty hand, over samples draws; samples 0: a data-driven block, which has no drop code (its loot applies)",
+                  "type": "object",
+                  "required": ["samples", "items"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "samples": { "type": "integer", "minimum": 0 },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": ["item", "aux", "data", "minCount", "maxCount", "hits"],
+                        "additionalProperties": false,
+                        "properties": {
+                          "item": { "type": "string", "pattern": "^[a-z0-9_.-]+:" },
+                          "aux": { "description": "The stack's own data value", "type": "integer" },
+                          "data": { "description": "Its data value as ItemStackBase::getAuxValue reads it: of the block it carries, if it carries one", "type": "integer" },
+                          "minCount": { "description": "The fewest in a draw that dropped it", "type": "integer", "minimum": 1 },
+                          "maxCount": { "description": "The most in a draw", "type": "integer", "minimum": 1 },
+                          "hits": { "description": "How many draws dropped it", "type": "integer", "minimum": 1 }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "lootTables": {
+      "description": "The loot tables the blocks' loot names, by path, as the vanilla behavior packs have them",
+      "type": "object",
+      "additionalProperties": { "type": "object" }
+    }
+  }
+}

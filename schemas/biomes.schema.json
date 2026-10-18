@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/mc-zuri/bedrock-data/schemas/biomes.schema.json",
+  "title": "release/<build>/biomes.json.gz (decompressed): every biome of the game's registry",
+  "type": "object",
+  "required": ["biomes"],
+  "additionalProperties": false,
+  "properties": {
+    "biomes": {
+      "description": "By name",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "id"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "description": "As the registry names it, without minecraft: (plains)", "type": "string" },
+          "id": { "description": "The numeric id a chunk's biomes are saved and sent by", "type": "integer", "minimum": 0 },
+          "definition": {
+            "description": "What biome_definition_list sends of it, where it sends it",
+            "type": "object",
+            "required": ["temperature", "downfall", "tags"],
+            "additionalProperties": false,
+            "properties": {
+              "temperature": { "type": "number" },
+              "downfall": { "type": "number" },
+              "depth": { "type": "number" },
+              "scale": { "type": "number" },
+              "rain": { "description": "Whether it rains (or snows) there", "type": "boolean" },
+              "mapWaterColor": { "description": "Its water's colour on a map, 0xRRGGBB", "type": "integer", "minimum": 0, "maximum": 16777215 },
+              "tags": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/mc-zuri/bedrock-data/schemas/effects.schema.json",
+  "title": "release/<build>/effects.json.gz (decompressed): every mob effect",
+  "type": "object",
+  "required": ["effects"],
+  "additionalProperties": false,
+  "properties": {
+    "effects": {
+      "description": "By id, from 1",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "descriptionId", "harmful"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "description": "The id the server sends a client for it", "type": "integer", "minimum": 1 },
+          "name": { "description": "speed, fatal_poison", "type": "string" },
+          "descriptionId": { "description": "Its language key, as the language file has it (potion.moveSpeed)", "type": "string" },
+          "harmful": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

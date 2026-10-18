@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/mc-zuri/bedrock-data/schemas/entities.schema.json",
+  "title": "release/<build>/entities.json.gz (decompressed): the entities the server sends a client, and the vanilla behavior packs' definitions of them",
+  "type": "object",
+  "required": ["entities", "definitions", "lootTables"],
+  "additionalProperties": false,
+  "properties": {
+    "entities": {
+      "description": "available_entity_identifiers, in the server's order",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "id", "hasSpawnEgg", "summonable"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "id": { "description": "Its runtime id: the numeric entity type", "type": "integer" },
+          "hasSpawnEgg": { "type": "boolean" },
+          "summonable": { "type": "boolean" }
+        }
+      }
+    },
+    "definitions": {
+      "description": "Each entity a pack defines, by identifier: its minecraft:entity's description, components, component groups and events, as the packs have them",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["description"],
+        "additionalProperties": false,
+        "properties": {
+          "description": { "type": "object" },
+          "components": { "type": "object" },
+          "component_groups": { "type": "object" },
+          "events": { "type": "object" }
+        }
+      }
+    },
+    "lootTables": { "description": "Every loot table their minecraft:loot reaches, by path, as the packs have them", "type": "object" }
+  }
+}
