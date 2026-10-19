@@ -264,7 +264,7 @@ gzip of one JSON object: every registered item in id order, the old names the ga
 ```json
 {
   "items": [
-    { "name": "minecraft:diamond_sword", "id": 316, "descriptionId": "item.diamond_sword", "maxStackSize": 1, "maxDamage": 1561, "enchantSlots": 16, "tags": ["minecraft:is_sword", "..."], "repairItems": ["minecraft:diamond"], "componentBased": false }
+    { "name": "minecraft:diamond_sword", "id": 316, "descriptionId": "item.diamond_sword", "descriptionName": "Diamond Sword", "maxStackSize": 1, "maxDamage": 1561, "enchantSlots": 16, "tags": ["minecraft:is_sword", "..."], "repairItems": ["minecraft:diamond"], "componentBased": false }
   ],
   "aliases": [{ "name": "minecraft:fish", "item": "minecraft:cod" }],
   "complexAliases": [{ "name": "minecraft:log", "items": ["minecraft:oak_log", "..."] }],
@@ -277,6 +277,10 @@ gzip of one JSON object: every registered item in id order, the old names the ga
   data-driven item: 1.21.93's egg) the item's own field; `maxDamage`: `Item::getMaxDamage`, 0
   where it does not wear out; `enchantSlots`: `Item::getEnchantSlot`, its `Enchant::Slot` bits; `repairItems`: the
   items `Item::isValidRepairItem` takes, where it wears out.
+- `descriptionName`: its name as the game builds it, `Item::buildDescriptionName` of a stack of one (a block item's
+  holding its block's default state): the server's en_US name ("Bucket of Cod", "White Bed", "Oak Fence"), or, where
+  the server's language has none (the chemistry pack's, which the server does not load), the key it builds
+  (`tile.element.h.name`), which `language.json.gz` has; empty where the game names it nothing.
 - `componentBased`, and from 1.21.60 `version` and `nbt` (its components, as an NBT tag `{ type, name, value }`): as the
   item registry the server sends a client has them. `components`: its components as item_component sends them, an NBT
   tag of the same form, where it sends them (1.18.11 to 1.21.50: the vanilla foods and more). `creative`: the creative
@@ -438,7 +442,9 @@ the numbering of some items:
   server builds out of `Vec3::ZERO` and `Vec3::ONE` before those are set (its static initializers run in that order),
   so it is empty there.
 - From 1.21.42 to 1.26.10, 21 blocks' explosion resistance (terracotta, the dirt path, concrete, ...) is `4.2`,
-  `0.65`, `1.8` on Linux and `4.2000003`, `0.65000004`, `1.8000001` on Windows.
+  `0.65`, `1.8` on Linux and `4.2000003`, `0.65000004`, `1.8000001` on Windows: a state's is its type's (kept times 5)
+  divided by 5, which the MSVC-built server does as times 0.2. This one is corrected too: `blocks.json.gz` read from
+  Linux has the Windows values.
 - Some items are numbered (`items.json.gz`'s `id`, the runtime id) in another order on each platform: the spears,
   bundles, trial keys and the wind charge (1.21.130: the stone spear is 258 on Linux, 262 on Windows). Each platform
   numbers them the same way every run.

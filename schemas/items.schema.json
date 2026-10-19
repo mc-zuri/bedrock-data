@@ -12,12 +12,16 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["name", "id", "descriptionId", "maxStackSize", "maxDamage", "enchantSlots", "tags", "repairItems", "componentBased"],
+        "required": ["name", "id", "descriptionId", "descriptionName", "maxStackSize", "maxDamage", "enchantSlots", "tags", "repairItems", "componentBased"],
         "additionalProperties": false,
         "properties": {
           "name": { "type": "string", "pattern": "^[a-z0-9_.-]+:" },
           "id": { "description": "The runtime id the server sends a client for it", "type": "integer" },
           "descriptionId": { "description": "Its language key, without .name; empty where it has none", "type": "string" },
+          "descriptionName": {
+            "description": "Its name as the game builds it (Item::buildDescriptionName of a stack of one; a block item's holds its block's default state): the server's en_US name (\"Bucket of Cod\"), or the key it builds where its language has none (\"tile.element.h.name\": the chemistry pack's); empty where it names it nothing",
+            "type": "string"
+          },
           "maxStackSize": { "description": "Item::getMaxStackSize, of a stack without data (a bucket's by what it holds)", "type": "integer", "minimum": 1, "maximum": 64 },
           "maxDamage": { "description": "Item::getMaxDamage: its durability, 0 where it does not wear out", "type": "integer", "minimum": 0 },
           "enchantSlots": { "description": "Item::getEnchantSlot: Enchant::Slot bits (armor head 1, torso 2, feet 4, legs 8, sword 16, bow 32, ...; -1 every bit)", "type": "integer" },
