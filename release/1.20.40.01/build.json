@@ -26,6 +26,50 @@
     "blockShapes": {
       "file": "block_shapes.json.gz",
       "from": "linux"
+    },
+    "blocks": {
+      "file": "blocks.json.gz",
+      "from": "linux"
+    },
+    "items": {
+      "file": "items.json.gz",
+      "from": "linux"
+    },
+    "enchantments": {
+      "file": "enchantments.json.gz",
+      "from": "linux"
+    },
+    "biomes": {
+      "file": "biomes.json.gz",
+      "from": "linux"
+    },
+    "effects": {
+      "file": "effects.json.gz",
+      "from": "linux"
+    },
+    "enums": {
+      "file": "enums.json.gz",
+      "from": "linux"
+    },
+    "tints": {
+      "file": "tints.json.gz",
+      "from": "linux"
+    },
+    "recipes": {
+      "file": "recipes.json.gz",
+      "from": "linux"
+    },
+    "entities": {
+      "file": "entities.json.gz",
+      "from": "linux"
+    },
+    "commands": {
+      "file": "commands.json.gz",
+      "from": "linux"
+    },
+    "attributes": {
+      "file": "attributes.json.gz",
+      "from": "linux"
     }
   }
 }
