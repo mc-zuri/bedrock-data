@@ -15,10 +15,6 @@
     }
   },
   "data": {
-    "language": {
-      "file": "language.json.gz",
-      "from": "linux"
-    },
     "blockPalette": {
       "file": "block_palette.nbt",
       "from": "linux"

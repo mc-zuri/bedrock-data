@@ -99,7 +99,9 @@ changes nothing. The commit that adds or changes a release says which extractor 
 ### language.json.gz ([schema](schemas/language.schema.json))
 
 gzip of one JSON object: every resource pack's `texts/en_US.lang` in the server zip
-(`resource_packs/<pack>/texts/en_US.lang`), the `vanilla` pack first, then the others by name.
+(`resource_packs/<pack>/texts/en_US.lang`), the `vanilla` pack first, then the others by name. 1.16.220.02's Linux zip
+has no `resource_packs/chemistry/texts/en_US.lang`, though the pack's `contents.json` lists it: its `chemistry` is the
+Windows zip's (`from` is still `linux`, the zip every other pack was read from).
 
 ```json
 { "locale": "en_US", "packs": { "vanilla": { "accessibility.index": " %s of %s", "...": "..." }, "chemistry": { "...": "..." }, "editor": { "...": "..." } } }
@@ -445,9 +447,11 @@ the numbering of some items:
   `0.65`, `1.8` on Linux and `4.2000003`, `0.65000004`, `1.8000001` on Windows: a state's is its type's (kept times 5)
   divided by 5, which the MSVC-built server does as times 0.2. This one is corrected too: `blocks.json.gz` read from
   Linux has the Windows values.
-- Some items are numbered (`items.json.gz`'s `id`, the runtime id) in another order on each platform: the spears,
-  bundles, trial keys and the wind charge (1.21.130: the stone spear is 258 on Linux, 262 on Windows). Each platform
-  numbers them the same way every run.
+- Up to 1.26.30 the items a `vanilla_<version>` behavior pack defines (the spears, bundles, trial keys, the wind
+  charge) are numbered (`items.json.gz`'s `id`, the runtime id) in another order on each platform: both give a pack's
+  items the same ids, Windows in the order its folder lists their files (by name), Linux in an order of its own
+  (1.21.130: the stone spear is 258 on Linux, 262 on Windows). This one is corrected too: `items.json.gz` read from
+  Linux numbers them as Windows does. From 1.26.40 both number them by name.
 - What the server sends out of a hash map comes in another order on each platform, the same on each every run: the
   entity identifiers (`entities.json.gz`'s `entities`) and the player's attributes (`attributes.json.gz`). What they
   hold is the same.
