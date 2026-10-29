@@ -1,0 +1,75 @@
+{
+  "build": "1.26.60.6",
+  "version": "1.26.60",
+  "channel": "release",
+  "binary": {
+    "linux": {
+      "url": "https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.60.6.zip",
+      "sha256": "cbbd5414fa6a310353ed1fc76a0ba691c3fd1ea852fd04bb76764ee4c1afdb98",
+      "size": 98094690
+    },
+    "windows": {
+      "url": "https://www.minecraft.net/bedrockdedicatedserver/bin-win/bedrock-server-1.26.60.6.zip",
+      "sha256": "21620db4f80d0fe206f21cb08f52f4e5f14252ce865ec49ccfbe0d9f93ce88b0",
+      "size": 88759231
+    }
+  },
+  "data": {
+    "language": {
+      "file": "language.json.gz",
+      "from": "linux"
+    },
+    "blockPalette": {
+      "file": "block_palette.nbt",
+      "from": "linux"
+    },
+    "blockShapes": {
+      "file": "block_shapes.json.gz",
+      "from": "linux"
+    },
+    "blocks": {
+      "file": "blocks.json.gz",
+      "from": "linux"
+    },
+    "items": {
+      "file": "items.json.gz",
+      "from": "linux"
+    },
+    "enchantments": {
+      "file": "enchantments.json.gz",
+      "from": "linux"
+    },
+    "biomes": {
+      "file": "biomes.json.gz",
+      "from": "linux"
+    },
+    "effects": {
+      "file": "effects.json.gz",
+      "from": "linux"
+    },
+    "enums": {
+      "file": "enums.json.gz",
+      "from": "linux"
+    },
+    "tints": {
+      "file": "tints.json.gz",
+      "from": "linux"
+    },
+    "recipes": {
+      "file": "recipes.json.gz",
+      "from": "linux"
+    },
+    "entities": {
+      "file": "entities.json.gz",
+      "from": "linux"
+    },
+    "commands": {
+      "file": "commands.json.gz",
+      "from": "linux"
+    },
+    "attributes": {
+      "file": "attributes.json.gz",
+      "from": "linux"
+    }
+  }
+}
