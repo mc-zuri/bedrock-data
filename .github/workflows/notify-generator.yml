@@ -1,5 +1,5 @@
 # A push that adds or changes a release's data has bedrock-data-generator regenerate minecraft-data from that commit.
-# A preview's build.json alone changes nothing the generator reads. Running another repo's workflow takes a token
+# A preview's data (preview/) changes nothing the generator reads. Running another repo's workflow takes a token
 # (GENERATOR_DISPATCH_TOKEN); without one this does nothing, and the generator's own schedule picks the commit up
 # within the hour after the extractor's.
 name: notify generator

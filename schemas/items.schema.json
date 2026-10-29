@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/mc-zuri/bedrock-data/schemas/items.schema.json",
-  "title": "release/<build>/items.json.gz (decompressed): every registered item",
+  "title": "<channel>/<build>/items.json.gz (decompressed): every registered item",
   "type": "object",
   "required": ["items", "aliases", "complexAliases", "creative"],
   "additionalProperties": false,

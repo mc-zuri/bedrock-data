@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/mc-zuri/bedrock-data/schemas/recipes.schema.json",
-  "title": "release/<build>/recipes.json.gz (decompressed): the recipes of a grid crafting_data sends",
+  "title": "<channel>/<build>/recipes.json.gz (decompressed): the recipes of a grid crafting_data sends",
   "type": "object",
   "required": ["recipes"],
   "additionalProperties": false,

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/mc-zuri/bedrock-data/schemas/enchantments.schema.json",
-  "title": "release/<build>/enchantments.json.gz (decompressed): every enchantment",
+  "title": "<channel>/<build>/enchantments.json.gz (decompressed): every enchantment",
   "type": "object",
   "required": [
     "enchantments"

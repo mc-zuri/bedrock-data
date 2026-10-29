@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/mc-zuri/bedrock-data/schemas/commands.schema.json",
-  "title": "release/<build>/commands.json.gz (decompressed): the commands available_commands sends, with the console's help for each",
+  "title": "<channel>/<build>/commands.json.gz (decompressed): the commands available_commands sends, with the console's help for each",
   "type": "object",
   "required": ["commands", "enums"],
   "additionalProperties": false,
